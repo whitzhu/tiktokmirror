@@ -7,19 +7,6 @@ function App() {
   const [fileName, setFileName] = useState();
   const [error, setError] = useState();
 
-  const {
-    isDragActive,
-    getRootProps,
-    getInputProps,
-    isDragReject,
-  } = useDropzone({
-    onDrop,
-    onDropRejected,
-    accept: "video/mp4",
-    minSize: 0,
-    maxSize,
-  });
-
   const onDropRejected = (fileRejections) => {
     setError(fileRejections?.[0].errors?.[0]?.message);
   };
@@ -41,6 +28,19 @@ function App() {
       reader.readAsArrayBuffer(file);
     });
   }, []);
+
+  const {
+    isDragActive,
+    getRootProps,
+    getInputProps,
+    isDragReject,
+  } = useDropzone({
+    onDrop,
+    onDropRejected,
+    accept: "video/mp4",
+    minSize: 0,
+    maxSize,
+  });
 
   const resetFields = () => {
     setError("");
