@@ -22,14 +22,21 @@ function App() {
       <header className="App-header">
         <Dropzone
           onDrop={handleDrop}
-          accept="video/*"
+          accept="video/mp4"
           onDropRejected={handleDropRejected}
-          maxSize={40000000}
+          // 1 Megabyte = 1048576 Bytes
+          maxSize={52428800}
         >
-          {({ getRootProps, getInputProps }) => (
+          {({
+            getRootProps, getInputProps, isDragActive, isDragReject,
+          }) => (
             <div {...getRootProps({ className: "dropzone" })}>
               <input {...getInputProps()} />
-              <p>Drag and drop files, or click to select files</p>
+              <p>
+                {!isDragActive && "Click here or drop a file to upload!"}
+                {isDragActive && !isDragReject && "Drop it like it's hot!"}
+                {isDragReject && "File type not accepted, sorry!"}
+              </p>
             </div>
           )}
         </Dropzone>
