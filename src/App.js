@@ -1,23 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Dropzone from "react-dropzone";
+import "./App.css";
 
 function App() {
+  const [fileName, setFileName] = useState();
+  const [error, setError] = useState();
+
+  const handleDrop = (acceptedFiles) => setFileName(
+    acceptedFiles.map((file) => {
+      setError("");
+      return file.name;
+    }),
+  );
+
+  const handleDropRejected = (fileRejections) => {
+    setError(fileRejections?.[0].errors?.[0]?.message);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Dropzone
+          onDrop={handleDrop}
+          accept="video/*"
+          onDropRejected={handleDropRejected}
+          maxSize={40000000}
         >
-          Learn React
-        </a>
+          {({ getRootProps, getInputProps }) => (
+            <div {...getRootProps({ className: "dropzone" })}>
+              <input {...getInputProps()} />
+              <p>Drag and drop files, or click to select files</p>
+            </div>
+          )}
+        </Dropzone>
+        <p>{fileName}</p>
+        <p>{error}</p>
       </header>
     </div>
   );
