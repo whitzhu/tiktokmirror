@@ -1,15 +1,15 @@
 import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import "./App.css";
+import "./VideoUploader.css";
 
-function App() {
+function VideoUploader() {
   const maxSize = 52428800;
   const [fileName, setFileName] = useState();
   const [error, setError] = useState();
 
   const onDropRejected = useCallback((fileRejections) => {
     setError(fileRejections?.[0].errors?.[0]?.message);
-  });
+  }, []);
 
   const onDrop = useCallback((acceptedFiles) => {
     resetFields();
@@ -46,9 +46,8 @@ function App() {
     setError("");
     setFileName("");
   };
-
   return (
-    <div className="App">
+    <>
       <div {...getRootProps()} className="dropzone">
         <input {...getInputProps()} />
         <p>
@@ -59,9 +58,9 @@ function App() {
       </div>
       <p>{fileName}</p>
       <p className="error">{error}</p>
-      <button className="button">Mirror Video</button>
-    </div>
+      <button className="button">Upload</button>
+    </>
   );
 }
 
-export default App;
+export default VideoUploader;
