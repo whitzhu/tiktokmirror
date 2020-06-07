@@ -8,8 +8,38 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  font-family: sans-serif;
 }
 
+.button {
+  display: inline-block;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  color: white;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out,
+    transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.dropzone {
+  text-align: center;
+  padding: 40px;
+  border: 3px dashed #eeeeee;
+  color: #bdbdbd;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
