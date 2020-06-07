@@ -7,9 +7,9 @@ function App() {
   const [fileName, setFileName] = useState();
   const [error, setError] = useState();
 
-  const onDropRejected = (fileRejections) => {
+  const onDropRejected = useCallback((fileRejections) => {
     setError(fileRejections?.[0].errors?.[0]?.message);
-  };
+  });
 
   const onDrop = useCallback((acceptedFiles) => {
     resetFields();
@@ -49,7 +49,7 @@ function App() {
 
   return (
     <div className="App">
-      <div {...getRootProps()}>
+      <div {...getRootProps()} className="dropzone">
         <input {...getInputProps()} />
         <p>
           {!isDragActive && "Click here or drop a file to upload!"}
@@ -58,7 +58,8 @@ function App() {
         </p>
       </div>
       <p>{fileName}</p>
-      <p>{error}</p>
+      <p className="error">{error}</p>
+      <button className="button">Mirror Video</button>
     </div>
   );
 }
